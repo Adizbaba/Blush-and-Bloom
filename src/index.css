@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-soft: var(--color-soft);
+  --color-white: var(--color-white);
+  --color-cream: var(--color-cream);
+  --color-dark: var(--color-dark);
+  
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
+}
+
+:root {
+  /* Premium Studio Color Palette */
+  --color-primary: #FF4FA3;     /* Hot Pink */
+  --color-secondary: #FF6B6B;   /* Coral */
+  --color-accent: #FFD6A5;      /* Peach */
+  --color-soft: #B388FF;        /* Lavender */
+  --color-white: #FFFFFF;
+  --color-cream: #FFF8F3;
+  --color-dark: #2B2B2B;
+  
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Montserrat', sans-serif;
+}
+
+/* Base resets & scroll behavior */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-dark);
+}
+
+/* Custom Frosted Glass classes matching the design constraints */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(43, 43, 43, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Class-based styles for buttons and badges from Design HTML */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  height: 48px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  height: 48px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: var(--color-white);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  padding: 20px;
+}
+
+.badge {
+  background: var(--color-accent);
+  color: var(--color-dark);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* Custom Animation Classes representing the animations specified in design system */
+.animate-hero-zoom {
+  animation: heroZoom 8s infinite alternate ease-in-out;
+}
+
+@keyframes heroZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+/* Custom transitions and scroll effects */
+.hover-card-trigger {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hover-card-trigger:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(43, 43, 43, 0.12);
+}
+
+.hover-btn-trigger {
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.hover-btn-trigger:hover {
+  transform: scale(1.03);
+  filter: brightness(1.1);
+}
+
+/* Custom Scroll Reveals using standard css animations fallback */
+@keyframes revealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-visible {
+  animation: revealUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom scrollbar to keep layout luxurious */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: #E0E0E0;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Blush & Bloom Studio",
+  "description": "An elegant Australian Hair & Makeup Studio specializing in hair styling, colouring, bridal, event makeup, and beauty treatments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
