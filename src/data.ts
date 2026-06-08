@@ -4,6 +4,8 @@
  */
 
 import { ServiceItem, Artist, Review, QuizQuestion } from './types';
+// @ts-ignore
+import zaraPortrait from './assets/images/regenerated_image_1780951853920.png';
 
 export const STUDIO_SERVICES: ServiceItem[] = [
   // Hair Styling
@@ -161,10 +163,10 @@ export const STUDIO_ARTISTS: Artist[] = [
   },
   {
     id: 'art-3',
-    name: 'Zara Jenkins',
+    name: 'Jessica Sclafani',
     role: 'Senior Hair Artist & bridal Coiffeur',
-    bio: 'Zara brings high-energy luxury styling to every client. Her background in theatrical design and high-society bridal events makes her the master of spectacular up-dos, textured bridal waves, and luxurious hand-tied extensions.',
-    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600',
+    bio: 'Jessica brings high-energy luxury styling to every client. Her background in theatrical design and high-society bridal events makes her the master of spectacular up-dos, textured bridal waves, and luxurious hand-tied extensions.',
+    image: zaraPortrait,
     specialties: ['Editorial Bridal Up-dos', 'Seamless Extensions', 'Thick Hair Restyling'],
     rating: 5.0
   }
@@ -184,7 +186,7 @@ export const CLIENT_REVIEWS: Review[] = [
     author: 'Genevieve Wright',
     stars: 5,
     date: 'June 01, 2026',
-    text: 'Sienna did my wedding makeup alongside Zara styling my bridal hair, and they were incredible! My makeup survived tears, laughter, and humid weather beautifully. Every single guest complimented the look!',
+    text: 'Sienna did my wedding makeup alongside Jessica styling my bridal hair, and they were incredible! My makeup survived tears, laughter, and humid weather beautifully. Every single guest complimented the look!',
     service: 'Ultimate Garden Party Bridal Package'
   },
   {

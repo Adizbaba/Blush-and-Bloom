@@ -45,7 +45,7 @@ const GALLERY_ITEMS: PortfolioItem[] = [
     category: 'styling',
     tag: 'Signature Waves',
     title: 'Voluminous Editorial Waves',
-    artist: 'Zara Jenkins',
+    artist: 'Jessica Sclafani',
     image: port3Image,
     formula: 'Deep ceramic-tong curling with hydration sealing spray for long-lasting bounce'
   },
@@ -72,7 +72,7 @@ const GALLERY_ITEMS: PortfolioItem[] = [
     category: 'bridal',
     tag: 'Creative Up-do',
     title: 'Textured Whimsical Flower Bun',
-    artist: 'Zara Jenkins',
+    artist: 'Jessica Sclafani',
     image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=800',
     formula: 'Intertwined loose curls structure, hair securing pins, dry lavender flora attachments'
   }

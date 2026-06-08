@@ -9,12 +9,12 @@ interface AboutUsProps {
 }
 
 export default function AboutUs({ onBookClick }: AboutUsProps) {
-  // Define Victoria Bloom as the Founder
+  // Define Erina Booker as the Founder
   const founder = {
-    name: 'Victoria Bloom',
+    name: 'Erina Booker',
     role: 'Founder & Principal Hair Designer',
     image: founderPortrait,
-    bio: 'Victoria is the visionary force behind Blush & Bloom. With over 15 years of industry-defining prestige styling across London, Paris, and Sydney, Victoria curated Blush & Bloom as a sanctuary where editorial trends meet clean beauty. Having styled hair for royalty, high-fashion campaigns, and international runways, she brings an unmatched architectural precision to tailored colouring and bespoke hair artistry.',
+    bio: 'Erina is the visionary force behind Blush & Bloom. With over 15 years of industry-defining prestige styling across London, Paris, and Sydney, Erina curated Blush & Bloom as a sanctuary where editorial trends meet clean beauty. Having styled hair for royalty, high-fashion campaigns, and international runways, she brings an unmatched architectural precision to tailored colouring and bespoke hair artistry.',
     specialties: ['High-Fashion Cuts', 'Couture Balayage', 'Editorial Coiffure'],
     rating: 5.0,
     experience: '15+ Years'
@@ -140,7 +140,7 @@ export default function AboutUs({ onBookClick }: AboutUsProps) {
                 </h2>
                 <div className="space-y-4 font-sans text-xs md:text-sm text-gray-650 leading-relaxed font-light">
                   <p>
-                    Established by master stylist Victoria Bloom, Blush & Bloom was born from a pivotal realization: the finest editorial outcomes can be accomplished entirely with non-toxic, clean botanical formulations. After a decade styling runways across Europe, Victoria envisioned a sanctuary that honored both high-fashion complexity and structural hair health.
+                    Established by master stylist Erina Booker, Blush & Bloom was born from a pivotal realization: the finest editorial outcomes can be accomplished entirely with non-toxic, clean botanical formulations. After a decade styling runways across Europe, Erina envisioned a sanctuary that honored both high-fashion complexity and structural hair health.
                   </p>
                   <p>
                     From a single boutique studio, we have expanded our reach across Australia and New Zealand. Our signature formulation methodology fuses pure clay lighteners with biocompatible bond builders, allowing us to build spectacular, sun-drenched blonde dimensions and luminous, red-carpet glass finishes with zero ammonia, zero stress, and complete wellness.
@@ -206,7 +206,7 @@ export default function AboutUs({ onBookClick }: AboutUsProps) {
                 <h3 className="font-serif text-xl font-light text-dark leading-tight mb-1">{founder.name}</h3>
                 <span className="font-sans text-[10px] text-primary font-bold uppercase tracking-widest block mb-3">{founder.role}</span>
                 <p className="font-sans text-xs text-gray-550 leading-relaxed font-light">
-                  Founder Victoria brings unprecedented architectural styling directly to our bridal and colour portfolios.
+                  Founder Erina brings unprecedented architectural styling directly to our bridal and colour portfolios.
                 </p>
               </div>
               <div className="border-t border-gray-100 pt-3 flex flex-wrap gap-1.5">
