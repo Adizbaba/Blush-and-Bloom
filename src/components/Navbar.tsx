@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Sparkles, ChevronDown } from 'lucide-react';
+// @ts-ignore
+import logoIcon from '../assets/images/blush_and_bloom_logo_1780881803809.png';
 
 interface NavbarProps {
   currentTab: string;
@@ -11,7 +13,9 @@ export default function Navbar({ currentTab, setCurrentTab, openBookingModal }: 
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [artistsDropdownOpen, setArtistsDropdownOpen] = useState(false);
   const [mobileContactOpen, setMobileContactOpen] = useState(false);
+  const [mobileArtistsOpen, setMobileArtistsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +33,6 @@ export default function Navbar({ currentTab, setCurrentTab, openBookingModal }: 
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
     { id: 'consultation', label: 'Consultation' },
-    { id: 'artists', label: 'Artists' },
   ];
 
   const contactDropdownItems = [
@@ -40,6 +43,7 @@ export default function Navbar({ currentTab, setCurrentTab, openBookingModal }: 
   ];
 
   const isContactActive = contactDropdownItems.some(item => item.id === currentTab);
+  const isArtistsActive = currentTab === 'artists' || currentTab === 'gallery';
 
   const handleNavClick = (id: string) => {
     setCurrentTab(id);
@@ -62,8 +66,13 @@ export default function Navbar({ currentTab, setCurrentTab, openBookingModal }: 
           onClick={() => handleNavClick('home')}
           className="flex items-center space-x-2.5 text-left group focus:outline-none"
         >
-          <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white shadow-sm group-hover:scale-110 active:scale-95 transition-transform duration-300">
-            <Sparkles size={18} className="text-cream" />
+          <div className="w-10 h-10 rounded-full bg-transparent flex items-center justify-center p-0.5 shadow-md border border-pink-100/50 overflow-hidden group-hover:scale-110 active:scale-95 transition-transform duration-300">
+            <img
+              src={logoIcon}
+              alt="Blush & Bloom Logo"
+              className="w-full h-full object-cover rounded-full"
+              referrerPolicy="no-referrer"
+            />
           </div>
           <div>
             <span className={`block font-serif text-2xl md:text-3.5xl font-medium tracking-tight leading-none transition-colors duration-300 ${
@@ -101,6 +110,88 @@ export default function Navbar({ currentTab, setCurrentTab, openBookingModal }: 
             </button>
           ))}
 
+          {/* ARTISTS DROPDOWN MENU */}
+          <div
+            className="relative inline-block"
+            onMouseEnter={() => setArtistsDropdownOpen(true)}
+            onMouseLeave={() => setArtistsDropdownOpen(false)}
+          >
+            <button
+              id="nav-item-artists-dropdown"
+              onClick={() => setArtistsDropdownOpen(!artistsDropdownOpen)}
+              className={`font-sans text-sm font-medium tracking-[0.05em] transition-all duration-300 relative py-2 px-1 flex items-center gap-1 focus:outline-none ${
+                isArtistsActive
+                  ? 'text-primary'
+                  : isScrolled
+                    ? 'text-dark/80 hover:text-primary hover:scale-[1.02]'
+                    : 'text-white/95 hover:text-primary hover:scale-[1.02]'
+              }`}
+            >
+              <span>Artists</span>
+              <ChevronDown size={14} className={`transition-transform duration-305 ${artistsDropdownOpen ? 'rotate-180' : 'rotate-0'}`} />
+              {isArtistsActive && (
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-primary rounded-full" />
+              )}
+            </button>
+
+            {/* Dropdown Box Panel */}
+            <div
+              id="artists-dropdown-panel"
+              className={`absolute left-0 mt-2 w-52 bg-white/95 backdrop-blur-md text-dark border border-gray-150 rounded-2xl shadow-xl py-2 px-1.5 transition-all duration-300 transform origin-top-left z-50 space-y-0.5 before:absolute before:-top-3 before:left-0 before:right-0 before:h-3 before:content-[''] ${
+                artistsDropdownOpen
+                  ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
+                  : 'opacity-0 -translate-y-2 scale-95 pointer-events-none'
+              }`}
+            >
+              <button
+                id="dropdown-sub-artists-team"
+                onClick={() => {
+                  handleNavClick('artists');
+                  setArtistsDropdownOpen(false);
+                }}
+                className={`w-full text-left px-4 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-xl transition-all duration-200 select-none ${
+                  currentTab === 'artists'
+                    ? 'bg-primary/10 text-primary'
+                    : 'hover:bg-primary/5 text-dark/80 hover:text-dark'
+                }`}
+              >
+                Meet the Team
+              </button>
+              <button
+                id="dropdown-sub-artists-gallery"
+                onClick={() => {
+                  handleNavClick('gallery');
+                  setArtistsDropdownOpen(false);
+                }}
+                className={`w-full text-left px-4 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-xl transition-all duration-200 select-none ${
+                  currentTab === 'gallery'
+                    ? 'bg-primary/10 text-primary'
+                    : 'hover:bg-primary/5 text-dark/80 hover:text-dark'
+                }`}
+              >
+                Gallery
+              </button>
+            </div>
+          </div>
+
+          {/* ABOUT US NAV LINK */}
+          <button
+            id="nav-item-about-us"
+            onClick={() => handleNavClick('about-us')}
+            className={`font-sans text-sm font-medium tracking-[0.05em] transition-all duration-300 relative py-2 ${
+              currentTab === 'about-us'
+                ? 'text-primary'
+                : isScrolled
+                  ? 'text-dark/80 hover:text-primary hover:scale-[1.02]'
+                  : 'text-white/95 hover:text-primary hover:scale-[1.02]'
+            }`}
+          >
+            About Us
+            {currentTab === 'about-us' && (
+              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-primary rounded-full" />
+            )}
+          </button>
+
           {/* CONTACT DROPDOWN MENU */}
           <div
             className="relative inline-block"
@@ -128,7 +219,7 @@ export default function Navbar({ currentTab, setCurrentTab, openBookingModal }: 
             {/* Dropdown Box Panel */}
             <div
               id="contact-dropdown-panel"
-              className={`absolute right-0 mt-2 w-52 bg-white/95 backdrop-blur-md text-dark border border-gray-150 rounded-2xl shadow-xl py-2 px-1.5 transition-all duration-300 transform origin-top-right z-50 space-y-0.5 ${
+              className={`absolute right-0 mt-2 w-52 bg-white/95 backdrop-blur-md text-dark border border-gray-150 rounded-2xl shadow-xl py-2 px-1.5 transition-all duration-300 transform origin-top-right z-50 space-y-0.5 before:absolute before:-top-3 before:left-0 before:right-0 before:h-3 before:content-[''] ${
                 dropdownOpen
                   ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
                   : 'opacity-0 -translate-y-2 scale-95 pointer-events-none'
@@ -199,6 +290,65 @@ export default function Navbar({ currentTab, setCurrentTab, openBookingModal }: 
               {item.label}
             </button>
           ))}
+
+          {/* ACCORDION TRIGGER FOR ARTISTS SECTION */}
+          <div className="flex flex-col border-b border-gray-200/40 pb-1">
+            <button
+              id="mob-artists-accordion-header"
+              onClick={() => setMobileArtistsOpen(!mobileArtistsOpen)}
+              className={`w-full flex items-center justify-between text-left font-serif text-xl font-medium tracking-wide py-2.5 transition-colors ${
+                isArtistsActive ? 'text-primary' : 'text-dark/90'
+              }`}
+            >
+              <span>Artists</span>
+              <ChevronDown size={18} className={`transition-transform duration-300 ${mobileArtistsOpen ? 'rotate-180' : 'rotate-0'}`} />
+            </button>
+
+            {/* Accordion sub-items container */}
+            <div
+              id="mob-artists-accordion-content"
+              className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                mobileArtistsOpen ? 'max-h-60 opacity-100 mt-2 pb-2' : 'max-h-0 opacity-0 pointer-events-none'
+              }`}
+            >
+              <div className="pl-4 flex flex-col space-y-2.5 border-l-2 border-primary/20">
+                <button
+                  id="mob-dropdown-sub-artists-team"
+                  onClick={() => {
+                    handleNavClick('artists');
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`text-left font-sans text-xs font-semibold uppercase tracking-wider py-1.5 transition-colors ${
+                    currentTab === 'artists' ? 'text-primary' : 'text-gray-500 hover:text-dark'
+                  }`}
+                >
+                  Meet the Team
+                </button>
+                <button
+                  id="mob-dropdown-sub-artists-gallery"
+                  onClick={() => {
+                    handleNavClick('gallery');
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`text-left font-sans text-xs font-semibold uppercase tracking-wider py-1.5 transition-colors ${
+                    currentTab === 'gallery' ? 'text-primary' : 'text-gray-500 hover:text-dark'
+                  }`}
+                >
+                  Gallery
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button
+            id="mob-nav-item-about-us"
+            onClick={() => handleNavClick('about-us')}
+            className={`text-left font-serif text-xl font-medium tracking-wide py-2 border-b border-gray-200/40 transition-colors ${
+              currentTab === 'about-us' ? 'text-primary pl-2 border-l-2 border-l-primary animate-none' : 'text-dark/90'
+            }`}
+          >
+            About Us
+          </button>
 
           {/* ACCORDION TRIGGER FOR CONTACT SECTION */}
           <div className="flex flex-col border-b border-gray-200/40 pb-1">

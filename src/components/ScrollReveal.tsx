@@ -10,6 +10,7 @@ interface ScrollRevealProps {
   delay?: number; // delay in milliseconds
   className?: string;
   classNameActive?: string;
+  key?: string | number;
 }
 
 export default function ScrollReveal({

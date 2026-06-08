@@ -19,18 +19,45 @@ import FloatingCTA from './components/FloatingCTA';
 import CookieConsent from './components/CookieConsent';
 import BookingForm from './components/BookingForm';
 import ScrollReveal from './components/ScrollReveal';
+import AboutUs from './components/AboutUs';
+import BackToTop from './components/BackToTop';
 
 import { MapPin, Phone, Mail, Instagram, Sparkles, Heart } from 'lucide-react';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState('home');
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState<ServiceItem[]>([]);
   const [pageLoaded, setPageLoaded] = useState(false);
 
   useEffect(() => {
-    // Page load fade-in hook
+    // Initial page load selection setup
     setPageLoaded(true);
+    const initialPath = window.location.pathname;
+    setCurrentPath(initialPath);
+    if (initialPath === '/about-us') {
+      setCurrentTab('about-us');
+    } else if (initialPath === '/gallery') {
+      setCurrentTab('gallery');
+    } else {
+      setCurrentTab('home');
+    }
+
+    // Capture back & forward clicks to keep client state synchronized
+    const handlePopState = () => {
+      const updatedPath = window.location.pathname;
+      setCurrentPath(updatedPath);
+      if (updatedPath === '/about-us') {
+        setCurrentTab('about-us');
+      } else if (updatedPath === '/gallery') {
+        setCurrentTab('gallery');
+      } else {
+        setCurrentTab('home');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   const handleToggleService = (service: ServiceItem) => {
@@ -44,10 +71,32 @@ export default function App() {
     });
   };
 
+  const navigateTo = (path: string) => {
+    window.history.pushState(null, '', path);
+    setCurrentPath(path);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
   // Connect navigation link clicks to scroll smoothly down
   const handleNavNavigation = (id: string) => {
     setCurrentTab(id);
+    if (id === 'about-us') {
+      navigateTo('/about-us');
+      return;
+    }
+
+    if (id === 'gallery') {
+      navigateTo('/gallery');
+      return;
+    }
+
+    if (id === 'home' && (currentPath === '/about-us' || currentPath === '/gallery')) {
+      navigateTo('/');
+      return;
+    }
+
     if (id === 'home') {
+      navigateTo('/');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -61,15 +110,33 @@ export default function App() {
     else if (id === 'faq') targetId = 'faq-section';
     else if (id === 'contact') targetId = 'contact-section';
 
-    const element = document.getElementById(targetId);
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+    if (currentPath !== '/') {
+      window.history.pushState(null, '', '/');
+      setCurrentPath('/');
+      
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(targetId);
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
     }
   };
 
@@ -88,80 +155,83 @@ export default function App() {
       />
 
       <main className="flex-grow">
-        {/* HERO HEADER */}
-        <Hero
-          onBookClick={() => setIsBookingOpen(true)}
-          onExploreClick={() => handleNavNavigation('services')}
-        />
+        {currentPath === '/about-us' ? (
+          <AboutUs onBookClick={() => setIsBookingOpen(true)} />
+        ) : currentPath === '/gallery' ? (
+          <Portfolio standalone={true} />
+        ) : (
+          <>
+            {/* HERO HEADER */}
+            <Hero
+              onBookClick={() => setIsBookingOpen(true)}
+              onExploreClick={() => handleNavNavigation('services')}
+            />
 
-        {/* INTRODUCTORY SIGNATURE BIO BANNER */}
-        <ScrollReveal delay={100} className="w-full">
-          <section id="brand-story" className="py-20 md:py-28 bg-white border-b border-gray-100 text-center">
-            <div className="max-w-[720px] mx-auto px-6 md:px-8">
-              <div className="w-9 h-9 rounded-full bg-accent/60 mx-auto flex items-center justify-center text-primary mb-6 animate-pulse">
-                <Heart size={16} className="fill-current text-primary" />
-              </div>
-              <h2 className="font-serif text-3xl md:text-5xl font-light text-dark leading-tight tracking-tight mb-6">
-                Redefining prestige beauty inside <span className="italic font-normal text-primary">Australia &amp; New Zealand</span>.
-              </h2>
-              <p className="font-sans text-sm md:text-base text-gray-600 leading-relaxed font-light mb-8">
-                Blush &amp; Bloom Studio is not just a standard salon. We are a sanctuary for high-society weddings, fashion-forward coloring, and red-carpet experiences. Inspired by high-end Australian &amp; New Zealand beauty motifs, our senior artists formulate custom-tailored glazes and photogenic base glows using strictly non-toxic, certified clean formulations.
-              </p>
-              <div className="flex items-center justify-center gap-2 text-xs uppercase tracking-widest text-primary font-bold">
-                <Sparkles size={14} className="text-secondary animate-pulse" />
-                <span>The Bloom Guarantee: Luminous hold. Pure luxury.</span>
-              </div>
-            </div>
-          </section>
-        </ScrollReveal>
+            {/* INTRODUCTORY SIGNATURE BIO BANNER */}
+            <ScrollReveal delay={100} className="w-full">
+              <section id="brand-story" className="py-20 md:py-28 bg-white border-b border-gray-100 text-center">
+                <div className="max-w-[720px] mx-auto px-6 md:px-8">
+                  <div className="w-9 h-9 rounded-full bg-accent/60 mx-auto flex items-center justify-center text-primary mb-6 animate-pulse">
+                    <Heart size={16} className="fill-current text-primary" />
+                  </div>
+                  <h2 className="font-serif text-3xl md:text-5xl font-light text-dark leading-tight tracking-tight mb-6">
+                    Redefining prestige beauty inside <span className="italic font-normal text-primary">Australia &amp; New Zealand</span>.
+                  </h2>
+                  <p className="font-sans text-sm md:text-base text-gray-600 leading-relaxed font-light mb-8">
+                    Blush &amp; Bloom Studio is not just a standard salon. We are a sanctuary for high-society weddings, fashion-forward coloring, and red-carpet experiences. Inspired by high-end Australian &amp; New Zealand beauty motifs, our senior artists formulate custom-tailored glazes and photogenic base glows using strictly non-toxic, certified clean formulations.
+                  </p>
+                  <div className="flex items-center justify-center gap-2 text-xs uppercase tracking-widest text-primary font-bold">
+                    <Sparkles size={14} className="text-secondary animate-pulse" />
+                    <span>The Bloom Guarantee: Luminous hold. Pure luxury.</span>
+                  </div>
+                </div>
+              </section>
+            </ScrollReveal>
 
-        {/* SERVICES MENU SECTION */}
-        <ScrollReveal delay={150} className="w-full">
-          <ServicesMenu
-            selectedServices={selectedServices}
-            onToggleService={handleToggleService}
-            openBookingWithSelected={() => setIsBookingOpen(true)}
-          />
-        </ScrollReveal>
+            {/* SERVICES MENU SECTION */}
+            <ScrollReveal delay={150} className="w-full">
+              <ServicesMenu
+                selectedServices={selectedServices}
+                onToggleService={handleToggleService}
+                openBookingWithSelected={() => setIsBookingOpen(true)}
+              />
+            </ScrollReveal>
 
-        {/* INTERACTIVE STYLE DIAGNOSTIC CONSULTATION QUIZ */}
-        <ScrollReveal delay={150} className="w-full">
-          <ConsultQuiz
-            selectedServices={selectedServices}
-            onAddService={handleToggleService}
-            openBooking={() => setIsBookingOpen(true)}
-          />
-        </ScrollReveal>
+            {/* INTERACTIVE STYLE DIAGNOSTIC CONSULTATION QUIZ */}
+            <ScrollReveal delay={150} className="w-full">
+              <ConsultQuiz
+                selectedServices={selectedServices}
+                onAddService={handleToggleService}
+                openBooking={() => setIsBookingOpen(true)}
+              />
+            </ScrollReveal>
 
-        {/* BRIDAL & WEDDING PORTFOLIO GALLERY */}
-        <ScrollReveal delay={150} className="w-full">
-          <Portfolio />
-        </ScrollReveal>
+            {/* ARTISTS DOSSIER PROFILE TILES */}
+            <ScrollReveal delay={150} className="w-full">
+              <MeetArtists />
+            </ScrollReveal>
 
-        {/* ARTISTS DOSSIER PROFILE TILES */}
-        <ScrollReveal delay={150} className="w-full">
-          <MeetArtists />
-        </ScrollReveal>
+            {/* CLIENT REVIEWS TESTIMONIAL BOARD */}
+            <ScrollReveal delay={150} className="w-full">
+              <Reviews />
+            </ScrollReveal>
 
-        {/* CLIENT REVIEWS TESTIMONIAL BOARD */}
-        <ScrollReveal delay={150} className="w-full">
-          <Reviews />
-        </ScrollReveal>
+            {/* POLICIES SECTION */}
+            <ScrollReveal delay={150} className="w-full">
+              <Policies />
+            </ScrollReveal>
 
-        {/* POLICIES SECTION */}
-        <ScrollReveal delay={150} className="w-full">
-          <Policies />
-        </ScrollReveal>
+            {/* FREQUENTLY ASKED QUESTIONS */}
+            <ScrollReveal delay={150} className="w-full">
+              <FAQ />
+            </ScrollReveal>
 
-        {/* FREQUENTLY ASKED QUESTIONS */}
-        <ScrollReveal delay={150} className="w-full">
-          <FAQ />
-        </ScrollReveal>
-
-        {/* CONTACT & DISCOVERY MAP */}
-        <ScrollReveal delay={150} className="w-full">
-          <Contact />
-        </ScrollReveal>
+            {/* CONTACT & DISCOVERY MAP */}
+            <ScrollReveal delay={150} className="w-full">
+              <Contact />
+            </ScrollReveal>
+          </>
+        )}
       </main>
 
       {/* FOOTER SECTION */}
@@ -213,25 +283,25 @@ export default function App() {
             <div className="md:col-span-4 space-y-3">
               <span className="block font-sans text-xs font-bold uppercase tracking-widest text-primary">Our Sanctuaries</span>
               <div className="space-y-3 pt-1.5">
-                <div className="flex items-start gap-2.5 font-sans text-xs text-gray-300">
+                <div className="flex items-start gap-2.5 font-sans text-xs text-gray-300 font-light">
                   <MapPin size={15} className="text-secondary shrink-0 mt-0.5" />
                   <div>
                     <span className="block font-semibold text-white">Australia</span>
                   </div>
                 </div>
-                <div className="flex items-start gap-2.5 font-sans text-xs text-gray-300 border-b border-white/5 pb-2">
+                <div className="flex items-start gap-2.5 font-sans text-xs text-gray-300 font-light border-b border-white/5 pb-2">
                   <Phone size={15} className="text-secondary shrink-0 mt-0.5" />
-                  <span>+61 3 9418 0000</span>
+                  <span>+61 485 989 107</span>
                 </div>
-                <div className="flex items-start gap-2.5 font-sans text-xs text-gray-300">
+                <div className="flex items-start gap-2.5 font-sans text-xs text-gray-300 font-light">
                   <MapPin size={15} className="text-secondary shrink-0 mt-0.5" />
                   <div>
                     <span className="block font-semibold text-white">New Zealand</span>
                   </div>
                 </div>
-                <div className="flex items-start gap-2.5 font-sans text-xs text-gray-300">
+                <div className="flex items-start gap-2.5 font-sans text-xs text-gray-300 font-light">
                   <Phone size={15} className="text-secondary shrink-0 mt-0.5" />
-                  <span>+64 9 307 0000</span>
+                  <span>+61 485 989 107</span>
                 </div>
               </div>
             </div>
@@ -251,6 +321,9 @@ export default function App() {
 
       {/* FLOATING GENERAL ACTIONS (Calendar widget desk link) */}
       <FloatingCTA openBookingModal={() => setIsBookingOpen(true)} />
+
+      {/* FIXED PAGE BACK TO TOP PILL ACTION BUTTON */}
+      <BackToTop />
 
       {/* REGULATORY PRIVACY COOKIE CONSENT BANNER */}
       <CookieConsent />

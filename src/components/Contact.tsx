@@ -67,7 +67,7 @@ export default function Contact() {
                       <Phone size={14} />
                     </div>
                     <div>
-                      <span className="block font-sans text-xs text-gray-500 select-all">+61 3 9418 0000</span>
+                      <span className="block font-sans text-xs text-gray-500 select-all">+61 485 989 107</span>
                     </div>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ export default function Contact() {
                       <Phone size={14} />
                     </div>
                     <div>
-                      <span className="block font-sans text-xs text-gray-500 select-all">+64 9 307 0000</span>
+                      <span className="block font-sans text-xs text-gray-500 select-all">+61 485 989 107</span>
                     </div>
                   </div>
                 </div>
@@ -95,7 +95,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <span className="block font-sans text-xs font-semibold text-dark">Enquiries</span>
-                    <span className="block font-sans text-xs text-gray-500 select-all">hello@blushandbloom.com.au</span>
+                    <span className="block font-sans text-xs text-gray-500 select-all">blushnbloom@hairdresser.net</span>
                   </div>
                 </div>
               </div>
