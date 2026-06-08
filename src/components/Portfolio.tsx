@@ -6,6 +6,10 @@
 import { useState } from 'react';
 import { Sparkles, Eye, X, BookOpen, Camera, Award } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
+// @ts-ignore
+import port1Image from '../assets/images/regenerated_image_1780883769613.png';
+// @ts-ignore
+import port3Image from '../assets/images/regenerated_image_1780884019060.png';
 
 interface PortfolioItem {
   id: string;
@@ -24,7 +28,7 @@ const GALLERY_ITEMS: PortfolioItem[] = [
     tag: 'Sunkissed Balayage',
     title: 'The Bondi Honey Glow',
     artist: 'Chloe Mitchell',
-    image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800',
+    image: port1Image,
     formula: 'French clay face paint + customized sandy beige glaze gloss over organic moisturiser'
   },
   {
@@ -42,7 +46,7 @@ const GALLERY_ITEMS: PortfolioItem[] = [
     tag: 'Signature Waves',
     title: 'Voluminous Editorial Waves',
     artist: 'Zara Jenkins',
-    image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=800',
+    image: port3Image,
     formula: 'Deep ceramic-tong curling with hydration sealing spray for long-lasting bounce'
   },
   {
