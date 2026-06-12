@@ -29,7 +29,7 @@ export default function FAQ() {
     },
     {
       question: 'Can I choose a specific artist for my hair or makeup?',
-      answer: "Absolutely! You can select Chloe, Sienna, or Jessica when filling in our digital reservation assistant. For general bookings, we assign senior stylists based on your diagnostic answers."
+      answer: "Absolutely! You can select Chloe, Ella, or Jessica when filling in our digital reservation assistant. For general bookings, we assign senior stylists based on your diagnostic answers."
     },
     {
       question: 'What is your refund policy on salon deposit locks?',

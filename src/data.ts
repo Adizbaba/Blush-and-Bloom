@@ -6,6 +6,8 @@
 import { ServiceItem, Artist, Review, QuizQuestion } from './types';
 // @ts-ignore
 import zaraPortrait from './assets/images/regenerated_image_1780951853920.png';
+// @ts-ignore
+import ellaPortrait from './assets/images/regenerated_image_1781301069900.png';
 
 export const STUDIO_SERVICES: ServiceItem[] = [
   // Hair Styling
@@ -154,10 +156,10 @@ export const STUDIO_ARTISTS: Artist[] = [
   },
   {
     id: 'art-2',
-    name: 'Sienna Montgomery',
+    name: 'Ella Johnson',
     role: 'Lead Bridal & Event Makeup Artist',
-    bio: 'Sienna is a true skin magician who spent years styling runway looks for prestigious Trans-Tasman Fashion Weeks. Her signature "high-end glass skin" look has graced prestigious magazines. She believes in amplifying a woman\'s natural symmetry rather than masking it.',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600',
+    bio: 'Ella is a true skin magician who spent years styling runway looks for prestigious Trans-Tasman Fashion Weeks. Her signature "high-end glass skin" look has graced prestigious magazines. She believes in amplifying a woman\'s natural symmetry rather than masking it.',
+    image: ellaPortrait,
     specialties: ['Airbrush Glow', 'Custom Eyelash Framing', 'Editorial Styling'],
     rating: 4.9
   },
@@ -186,7 +188,7 @@ export const CLIENT_REVIEWS: Review[] = [
     author: 'Genevieve Wright',
     stars: 5,
     date: 'June 01, 2026',
-    text: 'Sienna did my wedding makeup alongside Jessica styling my bridal hair, and they were incredible! My makeup survived tears, laughter, and humid weather beautifully. Every single guest complimented the look!',
+    text: 'Ella did my wedding makeup alongside Jessica styling my bridal hair, and they were incredible! My makeup survived tears, laughter, and humid weather beautifully. Every single guest complimented the look!',
     service: 'Ultimate Garden Party Bridal Package'
   },
   {

@@ -36,7 +36,7 @@ const GALLERY_ITEMS: PortfolioItem[] = [
     category: 'bridal',
     tag: 'Bridal Glam',
     title: 'The Yarra Hydrating Elegant Bridal Look',
-    artist: 'Sienna Montgomery',
+    artist: 'Ella Johnson',
     image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800',
     formula: 'Luxe hydrating base contouring, individual silk lash structure, Chanel nude lip gloss'
   },
@@ -54,7 +54,7 @@ const GALLERY_ITEMS: PortfolioItem[] = [
     category: 'makeup',
     tag: 'Red Carpet Event',
     title: 'Flawless Bare-Skin Glow',
-    artist: 'Sienna Montgomery',
+    artist: 'Ella Johnson',
     image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=800',
     formula: 'Luminous liquid minerals, feather brow sculpture, organic Rose quartz peach blush'
   },
